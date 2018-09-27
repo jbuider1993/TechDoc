@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "ab87ed77-7c09-4a45-a35c-4a251c1ae68f",
+		"name": "LegacyViewerExternFile",
+		"description": "LegacyViewer using extern file",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ccbe9608-cbd7-439d-ad06-c6120012a7ea",
+						"type": "text/javascript",
+						"exec": [
+							"let token =  responseBody;",
+							"console.log(token);",
+							"",
+							"pm.globals.unset(\"token\");",
+							"pm.globals.set(\"token\", token);",
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d5b49c60-db8d-46be-8033-0d92126cd03e",
+						"type": "text/javascript",
+						"exec": [
+							"console.log(\"{{tokenUrl}}\")"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{tokenUrl}}",
+					"host": [
+						"{{tokenUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ClaimTestCases",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c9c72b47-83b1-4acc-9eee-c348ef42741f",
+						"type": "text/javascript",
+						"exec": [
+							"let reqBody = JSON.stringify(\"{{body}}\")",
+							"pm.globals.unset(\"reqBody\");",
+							"pm.globals.set(\"reqBody\", reqBody);",
+							"console.log(reqBody);",
+							"",
+							"console.log(\"{{bundleName}}\")"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c5364fe3-7968-4cc1-9d19-0b484212d86f",
+						"type": "text/javascript",
+						"exec": [
+							"console.log(\"{{body}}\")"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {{body}}"
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				},
+				"description": "For Legacy test cases"
+			},
+			"response": []
+		}
+	]
+}
