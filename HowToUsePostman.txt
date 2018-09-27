@@ -1,0 +1,21 @@
+Postman NewMan
+
+In postman goto collection:
+ (1)  Create new collection
+ (2)  Add new request; 
+       In Tests Add: 
+                url = {{tokenUrl}} come from data file.
+	let token =  responseBody;
+                console.log(token);
+	pm.globals.unset("token");
+	pm.globals.set("token", token);
+       //get from response get the token, and then put it to globals variable token, that next step can      use it
+(3)  Add other request:
+       body set to {{body}} come from data file. in the data file can include variable {{token}}
+       request url = {{url}} come from data file.   
+
+How to execute the auto test with CLI?
+install nodejs; newman
+npm install -g newman
+        
+CLI :   newman run LegacyViewerExternFile.postman_collection.json -n 7 -d testcase_pnc.json --insecure
