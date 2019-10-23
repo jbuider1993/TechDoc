@@ -15,3 +15,6 @@ https://github.com/wuyouzhuguli/FEBS-Cloud
 
 Spring cloud All
 https://github.com/wuyouzhuguli/SpringAll
+
+Spring cloud config VS Kubernets
+https://dzone.com/articles/deploying-microservices-spring-cloud-vs-kubernetes
