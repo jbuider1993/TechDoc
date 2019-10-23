@@ -29,3 +29,15 @@ python -m pip install --trusted-host pypi.python.org --trusted-host files.python
 
 install docker-compose:
 pip install docker-compose --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --trusted-host pypi.org
+
+
+How to install Docker-compose:
+
+[root@docker-host ~]# yum install epel-release -y
+[root@docker-host ~]#  yum install python-pip -y
+[root@docker-host ~]# pip install --upgrade pip
+[root@docker-host ~]# pip install docker-compose
+if there are any issue look up
+
+
+
