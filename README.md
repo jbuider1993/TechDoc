@@ -30,6 +30,7 @@ python -m pip install --trusted-host pypi.python.org --trusted-host files.python
 install docker-compose:
 pip install docker-compose --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --trusted-host pypi.org
 
+pip install --upgrade pip  --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --trusted-host pypi.org
 
 How to install Docker-compose:
 
