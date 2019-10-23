@@ -38,6 +38,12 @@ yum install epel-release -y
 yum install python-pip -y
 pip install --upgrade pip
 pip install docker-compose
+
+
+export DOCKER_CLIENT_TIMEOUT=120
+export COMPOSE_HTTP_TIMEOUT=120
+
+
 if there are any issue look up
 
 
