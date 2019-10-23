@@ -22,3 +22,10 @@ https://dzone.com/articles/deploying-microservices-spring-cloud-vs-kubernetes
 Spring && Docker
 
 https://dzone.com/articles/microservice-architecture-with-spring-cloud-and-do
+
+python Pip update issue:
+
+python -m pip install --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --trusted-host pypi.org --upgrade pip
+
+install docker-compose:
+pip install docker-compose --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --trusted-host pypi.org
