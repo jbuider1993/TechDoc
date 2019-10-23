@@ -40,8 +40,8 @@ pip install --upgrade pip
 pip install docker-compose
 
 
-export DOCKER_CLIENT_TIMEOUT=120
-export COMPOSE_HTTP_TIMEOUT=120
+export DOCKER_CLIENT_TIMEOUT=300
+export COMPOSE_HTTP_TIMEOUT=300
 
 
 if there are any issue look up
