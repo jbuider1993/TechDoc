@@ -41,6 +41,32 @@ pip install docker-compose
 
 
 
+
+
+Dockerfile:
+===========================================
+FROM openjdk:8-jre-alpine
+ENV APP_FILE books-service.jar
+ENV APP_HOME /usr/apps
+EXPOSE 8080
+COPY ./$APP_FILE $APP_HOME/
+WORKDIR $APP_HOME
+ENTRYPOINT ["sh", "-c"]
+CMD ["exec java -jar $APP_FILE"]
+===========================================
+docker build:
+
+docker build -f Dockerfile -t books-service:1.0 .
+
+
+
+docker tag books-service:1.0 jbuilder1993/sys:books-service
+docker push jbuilder1993/sys:books-service
+
+
+
+
+
 =============================================
 Docker network example
 =============================================
