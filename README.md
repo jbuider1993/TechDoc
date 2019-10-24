@@ -85,5 +85,8 @@ docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 
 
+https://github.com/piomin/sample-spring-microservices-new/tree/kubernetes
+
+
 
 
