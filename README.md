@@ -40,6 +40,13 @@ pip install --upgrade pip
 pip install docker-compose
 
 
+
+=============================================
+Docker network example
+=============================================
+https://www.baeldung.com/dockerizing-spring-boot-application
+
+
 export DOCKER_CLIENT_TIMEOUT=300
 export COMPOSE_HTTP_TIMEOUT=300
 
