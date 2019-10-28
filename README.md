@@ -88,5 +88,11 @@ docker rm $(docker ps -a -q)
 https://github.com/piomin/sample-spring-microservices-new/tree/kubernetes
 
 
-
+======================================================================================
+Docker start
+======================================================================================
+systemctl:
+$ sudo systemctl start docker
+service:
+$ sudo service docker start
 
