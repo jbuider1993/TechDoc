@@ -88,6 +88,9 @@ docker rm $(docker ps -a -q)
 https://github.com/piomin/sample-spring-microservices-new/tree/kubernetes
 
 
+https://github.com/oktadeveloper/okta-spring-microservices-docker-example.git 
+
+
 ======================================================================================
 Docker start
 ======================================================================================
@@ -101,3 +104,6 @@ $ sudo service docker start
 Active MQ
 docker run -p 61616:61616 -p 8161:8161 -d -it rmohr/activemq 
 ======================================================================================
+
+
+https://github.com/oktadeveloper/okta-spring-microservices-docker-example.git 
