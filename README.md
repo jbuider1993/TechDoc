@@ -107,3 +107,11 @@ docker run -p 61616:61616 -p 8161:8161 -d -it rmohr/activemq
 
 
 https://github.com/oktadeveloper/okta-spring-microservices-docker-example.git 
+
+
+
+===========================================
+docker link and docker-compose dependency
+===========================================
+https://medium.com/@itsromiljain/docker-compose-file-to-run-rest-spring-boot-application-container-and-mysql-container-775f15d21416
+https://github.com/itsromiljain/docker-gradle-springboot
