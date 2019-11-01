@@ -1,0 +1,79 @@
+https://www.rubydoc.info/gems/vagrant-docker-compose/0.0.1
+
+vagrant for install docker and docker-compose
+
+vagrant plugin install vagrant-docker-compose
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/trusty64"
+
+  config.vm.provision :docker
+  config.vm.provision :docker_compose, yml: "/vagrant/docker-compose.yml", run: "always"
+end
+
+
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+timezone = 'EST'
+
+required_plugins = %w(
+  vagrant-proxyconf
+)
+ 
+plugins_to_install = required_plugins.select { |plugin| not Vagrant.has_plugin? plugin }
+if not plugins_to_install.empty?
+  puts "Installing plugins: #{plugins_to_install.join(' ')}"
+  if system "vagrant plugin install #{plugins_to_install.join(' ')}"
+    exec "vagrant #{ARGV.join(' ')}"
+  else
+    abort "Installation of one or more plugins has failed. Aborting."
+  end
+end
+ 
+Vagrant.configure("2") do |config|
+  ntlm_proxy = "http://tcs_2282282:inforR%401232@10.151.28.140:3128"
+   
+  config.proxy.http = ntlm_proxy
+  config.proxy.https = ntlm_proxy
+  config.proxy.ftp = ntlm_proxy
+  config.proxy.enabled  = true
+ 
+  config.vm.define "devvm" do |devvm|
+    devvm.vm.box = "bento/centos-7.6"
+ 
+    devvm.vm.provider "virtualbox" do |v|
+     v.memory = 4096
+     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+     v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+    end
+
+    devvm.vm.network "forwarded_port", guest: 8080, host: 18080
+    devvm.vm.network "forwarded_port", guest: 8181, host: 18181
+    devvm.vm.network "forwarded_port", guest: 9000, host: 19000
+    devvm.vm.network "forwarded_port", guest: 3306, host: 3306
+	#devvm.vm.network "forwarded_port", guest: 9000, host: 19000
+
+    devvm.ssh.forward_x11 = true
+    devvm.ssh.forward_agent = true
+ 
+    config.vm.provision :docker
+    config.vm.provision :docker_compose
+    #devvm.vm.provision :shell, :path => "scripts/setup.sh" 
+	#devvm.vm.synced_folder '.', '/vagrant', disabled: true
+	
+    #Docker Provisioning
+    #devvm.vm.provision "docker", run: 'once'
+
+    # Ansible Provisioning
+    devvm.vm.provision 'ansible_local', run: 'once' do |a|
+      a.install_mode = "yum"
+      a.verbose = '-vvv'
+      a.playbook = './provisioning/ansible/playbook.yml'
+      a.raw_arguments = [
+        "--extra-vars 'timezone=#{timezone}'"
+      ]
+    end
+  end
+end
