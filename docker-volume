@@ -1,0 +1,2 @@
+-v /path:/path/in/container mounts the host directory, /path at the /path/in/container
+-v path:/path/in/container creates a volume named path with no relationship to the host.
