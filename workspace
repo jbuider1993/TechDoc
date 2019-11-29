@@ -25,3 +25,11 @@ https://www.briansdevblog.com/2019/06/soap-web-services-with-apache-cxf-and-spri
 spring cloud
 https://github.com/zuihou/zuihou-admin-cloud
 
+
+need add it for loading model component:
+or: <mat-error> exception
+import { BrowserModule } from '@angular/platform-browser';
+ @NgModule({
+     imports: [BrowserModule ]
+  })
+
