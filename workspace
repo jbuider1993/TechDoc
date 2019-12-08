@@ -62,3 +62,18 @@ https://github.com/JavaOutOfBounds
 http://www.javaoutofbounds.com/apache-camel-cxf-soap-service-example-with-jboss-fuse/#Developing_Apache_Camel_CXF_SOAP_Service_Example
 ====================================================
 
+
+
+docker run -p:8083:8080 \
+           --name che \
+           --restart always \
+           -v /var/run/docker.sock:/var/run/docker.sock \
+           -v /C/tmp:/data \
+           -v /C/conf:/conf \
+           -v /home/my_assembly:/assembly \
+           -e DOCKER_MACHINE_HOST=172.17.0.1 \
+           -e DOCKER_HOST=tcp://1.1.1.1:2375 \
+           eclipse/che-server:5.0.0
+           
+           
+           
