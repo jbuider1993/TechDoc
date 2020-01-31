@@ -1,0 +1,33 @@
+@Configuration
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+   @Override
+   protected void configure(HttpSecurity http) throws Exception {
+       http.
+            csrf().disable().
+            sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
+            and().
+            authorizeRequests().
+            antMatchers(HttpMethod.GET, "/rest/v1/session/login").permitAll().
+            antMatchers(HttpMethod.POST, "/rest/v1/session/register").permitAll().
+            antMatchers(HttpMethod.GET, "/rest/v1/session/logout").authenticated().
+            antMatchers(HttpMethod.GET, "/rest/v1/**").hasAuthority("ADMIN").
+            antMatchers(HttpMethod.POST, "/rest/v1/**").hasAuthority("USER").
+            antMatchers(HttpMethod.PATCH, "/rest/v1/**").hasAuthority("USER").
+            antMatchers(HttpMethod.DELETE, "/rest/v1/**").hasAuthority("USER").
+            anyRequest().permitAll();
+   }
+
+   @Override
+   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+       auth
+               .inMemoryAuthentication()
+               .withUser('admin').password('secret').roles('ADMIN');
+   }
+
+   @Bean
+   @Override
+   AuthenticationManager authenticationManagerBean() throws Exception {
+       return super.authenticationManagerBean()
+   }
+}
