@@ -1,0 +1,189 @@
+There are 3 interfaces in the Spring Security framework that may be of interest here:
+
+org.springframework.security.web.authentication.AuthenticationSuccessHandler
+org.springframework.security.web.authentication.AuthenticationFailureHandler
+org.springframework.security.web.access.AccessDeniedHandler
+
+You can create implementations of each of these Interfaces in order to customize the response sent for various events: successful login, failed login, attempt to access protected resource with insufficient permissions.
+
+The following would return a JSON response on unsuccessful login attempt
+
+@Component
+public class RestAuthenticationFailureHandler implements AuthenticationFailureHandler
+{
+  @Override
+  public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+      AuthenticationException ex) throws IOException, ServletException
+  {
+    response.setStatus(HttpStatus.FORBIDDEN.value());
+
+    Map<String, Object> data = new HashMap<>();
+    data.put("timestamp", new Date());
+    data.put("status",HttpStatus.FORBIDDEN.value());
+    data.put("message", "Access Denied");
+    data.put("path", request.getRequestURL().toString());
+
+    OutputStream out = response.getOutputStream();
+    com.fasterxml.jackson.databind.ObjectMapper mapper = new ObjectMapper();
+    mapper.writeValue(out, data);
+    out.flush();
+  }
+}
+
+
+@Configuration
+@EnableWebSecurity
+@ComponentScan("...")
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter
+{
+  @Override
+  public void configure(HttpSecurity http) throws Exception
+  {
+    http.addFilterBefore(corsFilter(), ChannelProcessingFilter.class).logout().deleteCookies("JESSIONID")
+        .logoutUrl("/api/logout").logoutSuccessHandler(logoutSuccessHandler()).and().formLogin().loginPage("/login")
+        .loginProcessingUrl("/api/login").failureHandler(authenticationFailureHandler())
+        .successHandler(authenticationSuccessHandler()).and().csrf().disable().exceptionHandling()
+        .authenticationEntryPoint(authenticationEntryPoint()).accessDeniedHandler(accessDeniedHandler());
+  }
+
+  /**
+   * @return Custom {@link AuthenticationFailureHandler} to send suitable response to REST clients in the event of a
+   *         failed authentication attempt.
+   */
+  @Bean
+  public AuthenticationFailureHandler authenticationFailureHandler()
+  {
+    return new RestAuthenticationFailureHandler();
+  }
+
+  /**
+   * @return Custom {@link AuthenticationSuccessHandler} to send suitable response to REST clients in the event of a
+   *         successful authentication attempt.
+   */
+  @Bean
+  public AuthenticationSuccessHandler authenticationSuccessHandler()
+  {
+    return new RestAuthenticationSuccessHandler();
+  }
+
+  /**
+   * @return Custom {@link AccessDeniedHandler} to send suitable response to REST clients in the event of an attempt to
+   *         access resources to which the user has insufficient privileges.
+   */
+  @Bean
+  public AccessDeniedHandler accessDeniedHandler()
+  {
+    return new RestAccessDeniedHandler();
+  }
+}
+
+====================================================================================================================================
+https://github.com/isopropylcyanide/Jwt-Spring-Security-JPA/issues/7
+====================================================================================================================================
+JwtAuthenticationEntryPoint
+HandlerExceptionResolver at the AuthenticationEntryPoint.
+
+EntryPoint for Unauthorized,
+
+@Component
+public class AuthenticationEntryPoint implements org.springframework.security.web.AuthenticationEntryPoint {
+
+	@Override
+	public void commence(HttpServletRequest request, HttpServletResponse response,
+			AuthenticationException authException) throws IOException, ServletException {
+		ApiResponse apiResponse = new ApiResponse(401, "Unauthorized. Token is expired", false);
+		OutputStream outputStream = response.getOutputStream();
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.writeValue(outputStream, apiResponse);
+		outputStream.flush();
+	}
+}
+
+Access Denied for permission,
+
+@Component
+public class AccessDeniedHandler implements org.springframework.security.web.access.AccessDeniedHandler {
+
+	@Override
+	public void handle(HttpServletRequest request, HttpServletResponse response,
+			AccessDeniedException accessDeniedException) throws IOException, ServletException {
+		
+		ApiResponse apiResponse = new ApiResponse(403, "Access Denied", false);
+		OutputStream outputStream = response.getOutputStream();
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.writeValue(outputStream, apiResponse);
+		outputStream.flush();
+		
+	}
+}
+
+ApiResponse.java
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ApiResponse {
+
+	private  int status;
+	private  boolean success;
+	private  String message;
+	private  String timestamp;
+	private  Object result;
+	
+	public ApiResponse(int status, String message, boolean success) {
+		this.status = status;
+		this.message = message;
+		this.success = success;
+		this.timestamp = Instant.now().toString();
+	}
+		
+}
+
+
+
+In WebSecurityConfig.java
+
+
+	// for 403 Access denied.
+	@Autowired
+	AccessDeniedHandler accessDeniedHandler;
+	// for 401 Token Expired.
+	@Autowired
+	AuthenticationEntryPoint authenticationEntryPoint;
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.cors().and().csrf().disable()
+		.anonymous().and()
+		.authorizeRequests()
+		.antMatchers("/",
+                "/favicon.ico",
+                "/**/*.png",
+                "/**/*.gif",
+                "/**/*.svg",
+                "/**/*.jpg",
+                "/**/*.html",
+                "/**/*.css",
+                "/**/*.js").permitAll()
+		.antMatchers("/**/Estates/**", "/**/api/auth/**").permitAll()
+		.anyRequest().authenticated()
+		.and()
+		.exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+		.authenticationEntryPoint(authenticationEntryPoint).and()
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
+		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+	}
+  
+  
+
+
+
+
+
+
+
+
+
+
+
