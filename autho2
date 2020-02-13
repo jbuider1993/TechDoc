@@ -16,3 +16,8 @@ https://stackoverflow.com/questions/45985310/customize-auth-error-from-spring-se
 this is an works example for catch the 401 and 403 exception:
 https://github.com/melardev/JavaSpringBootOAuth2JwtCrudPagination
 
+**********
+this is for the 401 chrome, by default chrome will redirect 401, and the client code can't recive the 401.
+Add   'X-Requested-With': 'XMLHttpRequest', in request header
+https://stackoverflow.com/questions/54820443/how-to-prevent-login-prompt-in-chrome-for-401-unauthorization-error-for-basic-au
+
