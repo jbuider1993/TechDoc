@@ -12,3 +12,6 @@ https://github.com/melardev/JavaSpringBootOAuth2JwtCrudPagination
 
 https://stackoverflow.com/questions/45985310/customize-auth-error-from-spring-security-using-oauth2
 
+this is an works example for catch the 401 and 403 exception:
+https://github.com/melardev/JavaSpringBootOAuth2JwtCrudPagination
+
