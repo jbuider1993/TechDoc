@@ -1,5 +1,5 @@
 https://www.baeldung.com/spring-webclient-resttemplate
-webClient
+org.apache.cxf.jaxrs.client.WebClient
 Apache HttpClient
 Sprinng RestTemplate
 
