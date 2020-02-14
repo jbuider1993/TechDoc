@@ -21,3 +21,4 @@ this is for the 401 chrome, by default chrome will redirect 401, and the client 
 Add   'X-Requested-With': 'XMLHttpRequest', in request header
 https://stackoverflow.com/questions/54820443/how-to-prevent-login-prompt-in-chrome-for-401-unauthorization-error-for-basic-au
 
+https://docs.spring.io/spring-security/site/docs/3.2.0.CI-SNAPSHOT/reference/html/appendix-namespace.html#nsa-frame-options
