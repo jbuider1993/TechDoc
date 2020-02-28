@@ -18,3 +18,5 @@ https://frictionlessdata.io/specs/table-schema/
            json schema
                 |
    form json   <=====(key ref)  model
+
+https://frictionlessdata.io/schemas/table-schema.json
