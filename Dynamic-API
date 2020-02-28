@@ -1,0 +1,89 @@
+dynamic api spring boot example
+
+https://stackoverflow.com/questions/41360048/can-spring-boot-dynamically-create-end-points-based-on-the-content-of-the-proper
+
+@RequestMapping(value = "/*", method = RequestMethod.GET, headers="Accept=*/*", produces = { "application/json" })
+    public ResponseEntity<Object> getData(@RequestParam Map<String, String> reqParam, HttpServletRequest request)
+            throws WriteException, IOException{
+
+        MessageLogger.infoLog(EquityControllerImpl.class, GETQADTRSTOCKPRICELOGS,
+                ENTRY);
+
+        // Get Request URI
+        MessageLogger.infoLog("Request URI: " + request.getRequestURI());
+        String requestUri = request.getRequestURI();
+
+
+        //Read all request parameters
+        Map<String, String> requestParamMap = new HashMap<>();
+        for (Map.Entry<String, String> param: reqParam.entrySet()
+             ) {
+            System.out.println("Parameter: " + param.getKey() + " ----> Value: " + param.getValue());
+            requestParamMap.put(param.getKey(),param.getValue());
+        }
+}
+
+swagger
+
+    @Configuration
+@EnableSwagger2
+@Import(SpringDataRestConfiguration.class)
+public class SwaggerConfig {
+
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.finance.dataplatform.*"))
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build().apiInfo(getApiInfo());
+    }
+
+    private ApiInfo getApiInfo() {
+        return new ApiInfoBuilder().title("Investment Management").build();
+    }
+
+    private static Predicate<String> matchPathRegex(final String... pathRegexs) {
+        return new Predicate<String>() {
+            @Override
+            public boolean apply(String input) {
+                for (String pathRegex : pathRegexs) {
+                    if (input.matches(pathRegex)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
+    }
+
+    @Bean
+    WebMvcConfigurer configurer () {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addResourceHandlers (ResourceHandlerRegistry registry) {
+                registry.addResourceHandler("/config/swagger.json")
+                        .addResourceLocations("classpath:/config");
+            }
+        };
+    }
+
+
+    @Primary
+    @Bean
+    public SwaggerResourcesProvider swaggerResourcesProvider(InMemorySwaggerResourcesProvider defaultResourcesProvider) {
+        return () -> {
+            SwaggerResource wsResource = new SwaggerResource();
+            wsResource.setName("default");
+            wsResource.setSwaggerVersion("2.0");
+            wsResource.setLocation("/config/swagger.json");
+
+            //List<SwaggerResource> resources = new ArrayList<>(defaultResourcesProvider.get());
+            List<SwaggerResource> resources = new ArrayList<>();
+            resources.add(wsResource);
+            return resources;
+        };
+    }
+}
+
