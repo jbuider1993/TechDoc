@@ -9,3 +9,12 @@ https://github.com/victools
 
 json validate
 https://github.com/everit-org/json-schema
+
+table schema with json
+https://frictionlessdata.io/specs/table-schema/
+
+           table schema
+                |
+           json schema
+                |
+   form json   <=====(key ref)  model
