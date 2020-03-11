@@ -1,0 +1,71 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+timezone = 'EST'
+
+required_plugins = %w(
+  vagrant-proxyconf
+  vagrant-docker-compose
+  vagrant-docker-login
+)
+ 
+plugins_to_install = required_plugins.select { |plugin| not Vagrant.has_plugin? plugin }
+if not plugins_to_install.empty?
+  puts "Installing plugins: #{plugins_to_install.join(' ')}"
+  if system "vagrant plugin install #{plugins_to_install.join(' ')}"
+    exec "vagrant #{ARGV.join(' ')}"
+  else
+    abort "Installation of one or more plugins has failed. Aborting."
+  end
+end
+ 
+Vagrant.configure("2") do |config|
+  ntlm_proxy = "http://2282282:infoR%401233@19.159.28.149:3198"
+   
+  config.proxy.http = ntlm_proxy
+  config.proxy.https = ntlm_proxy
+  config.proxy.ftp = ntlm_proxy
+  config.proxy.enabled  = true
+  
+  config.vm.hostname = "docker"
+  config.vm.define "devvm" do |devvm|
+  devvm.vm.box = "bento/ubuntu-19.04"
+ 
+  devvm.vm.provider "virtualbox" do |v|
+     v.memory = 4096
+     v.name = "devvm-proxy"
+     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+     v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+    end
+
+    devvm.vm.network "forwarded_port", guest: 8080, host: 18080
+    devvm.vm.network "forwarded_port", guest: 8181, host: 18181
+    devvm.vm.network "forwarded_port", guest: 9000, host: 19000
+    devvm.vm.network "forwarded_port", guest: 3306, host: 3306
+    devvm.vm.network "forwarded_port", guest: 33060, host: 33060
+    devvm.vm.network "forwarded_port", guest: 8888, host: 8888
+    devvm.vm.network "forwarded_port", guest: 8761, host: 8761
+    devvm.vm.network "forwarded_port", guest: 4000, host: 4000
+    devvm.vm.network "forwarded_port", guest: 4200, host: 4200
+
+    devvm.ssh.forward_x11 = true
+    devvm.ssh.forward_agent = true
+    devvm.vm.provision :shell, inline: "apt-get update"
+    devvm.vm.provision :docker
+    devvm.vm.provision :docker_login, username: "jbuilder1993", password: "Infor1234567890"
+    devvm.vm.provision :docker_compose
+    devvm.vm.provision :shell, :path => "scripts/setup.sh" 
+    devvm.vm.synced_folder '.', '/vagrant', disabled: false
+
+
+    # Ansible Provisioning
+    #devvm.vm.provision 'ansible_local', run: 'once' do |a|
+    #  a.install_mode = "yum"
+    #  a.verbose = '-vvv'
+    #  a.playbook = './provisioning/ansible/playbook.yml'
+    #  a.raw_arguments = [
+    #    "--extra-vars 'timezone=#{timezone}'"
+    #  ]
+    #end
+  end
+end
