@@ -1,0 +1,5 @@
+design
+https://access.redhat.com/documentation/en-US/Fuse_ESB_Enterprise/7.1/html/Using_the_Web_Services_Bindings_and_Transports/files/SOAP12Headers.html
+
+test:
+https://alvinalexander.com/java/jwarehouse/apache-cxf/rt/bindings/soap/src/test/resources/org/apache/cxf/binding/soap/test-soap-12-header.wsdl.shtml
