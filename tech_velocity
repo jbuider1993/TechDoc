@@ -1,0 +1,8 @@
+https://www.xwiki.org/xwiki/bin/view/Documentation/DevGuide/Scripting/APIGuide/
+
+## Note that getDocument() creates a Document if it doesn't exist. This can be checked with $newDoc.isNew()
+#set ($newDoc = $xwiki.getDocument('MySpace.MyPage'))
+## Set its content (for example)
+#set ($discard = $newDoc.setContent("new content"))
+## The second parameter to save() indicates whether the save is a minor edit or not
+#set ($discard = $newDoc.save("some comment explaining the save", true))
