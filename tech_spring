@@ -71,11 +71,19 @@ public class UserController {
         @GetMapping("{id}")
         public Optional<User> getUser(@PathVariable @Positive Long id) {
         }
-        
-        
- 
 }
+If the path variable fails validation, it will cause a constrainviolationException and not a MethodArgumentNotValidException
 
+@ResponseStatus(HttpStatus.INTERNAL_ERROR)
+@ExceptionHandler(ConstraintViolationException.class)
+public Map<String, String> handleConstraintViolation( ContraintViolationException ex) {
+       Map<String, String> errors = new HashMap<>();
+       ex.getConstraintViolations().forEach(cv -> {
+         errors.put("message", cv.getMessage());
+         errors.put("path", cv.getProperPath.toString());
+       });
+       return errors;
+}
 
 
 
