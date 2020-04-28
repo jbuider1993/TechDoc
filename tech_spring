@@ -18,6 +18,28 @@ Spring boot validation:
 =============================================================================
 https://examples.javacodegeeks.com/spring-boot-bean-validation-example/
 =============================================================================
+Validatin JPA Entities
+
+
+@Entity
+public class User {
+   @NotEmpty(message = "First name is required")
+   private String firstName;
+   @NotEmpty(message = "Email is required")
+   @Email
+   private String email;
+   
+   @Past
+   @JsonFormat(pattern = "yyyy-mm-dd")
+   private LocalDate birthDay;
+   
+   @ElementCollection
+   private List<@NotEmpty String> mobilDevices;
+}
+
+
+
+
 Define a Custom Constraint
 
 @Target({ElementType.FILED})
