@@ -14,3 +14,59 @@ https://gitee.com/zlt2000/microservices-platform
 https://gitee.com/owenwangwen/open-capacity-platform
 https://gitee.com/zuihou111/zuihou-admin-cloud
 
+Spring boot validation:
+=============================================================================
+https://examples.javacodegeeks.com/spring-boot-bean-validation-example/
+=============================================================================
+Define a Custom Constraint
+
+@Target({ElementType.FILED})
+@Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = CommPreferenceValidator.class)
+@Documented
+public @interface CommPreference {
+    String message() default "Communication preference must be email or mobilePhone.";
+    Class<?>[] groups() default {};
+    Class<? externs Payload> payload() default {};
+}
+
+
+@Target({ElementType.FILED}) -- declares that constraint can be used as fields.
+@Retention(RetentionPolicy.RUNTIME) -- states that is a runtime annotation.
+@Constraint(validatedBy = CommPreferenceValidator.class) -- specifies the class that will perform the validation.
+@Documented -- causes this annotated type to be included when generating Javadoc documentation.
+
+String message() -- allows us to specify the default error message that is returned if the validation fails.
+Class<?>[] groups() --allows the speciifcation of validation group - e.g. @Age(groups=MALE)
+Class<? extends Payload>[] payLoad() -- used to relay metadata information
+
+public class CommPreference implements ConstrainValidator<CommPreference, String> {
+       private final List<String> commPreferences = Arrays.asList("email", "mobilePhone");
+       @Override
+       public boolean isValid(String value, ConstraintValidatorContext context) {
+           return commPreferences.contains(value);         
+       }
+}
+
+use case:
+@Entity
+public class User {
+
+    @NotEmpty(message = "Commmunication preference is required")
+    @CommPreference
+    private String commPreference;
+}
+
+if (User.commPreference.contains("email").and.contains("mobilePhone"))
+   show message: Communication preference must be email or mobilePhone.
+
+
+
+
+
+
+
+
+
+
+
