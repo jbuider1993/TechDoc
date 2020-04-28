@@ -86,6 +86,17 @@ public Map<String, String> handleConstraintViolation( ContraintViolationExceptio
 }
 
 
+Validating Method return Values
+
+useing: @valid and Optional<?> e.g
+@GetMapping("{id}")
+@Valid
+public Optional<User> getUser(@PathVariable @Positive Long id) {
+   return userRespository.findById(id);
+}
+
+
+
 
 
 
