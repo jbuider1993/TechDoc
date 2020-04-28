@@ -60,7 +60,21 @@ public class User {
 if (User.commPreference.contains("email").and.contains("mobilePhone"))
    show message: Communication preference must be email or mobilePhone.
 
+Validation Path Variables
+1) should add @Validated in the controler class
 
+@RestController
+@RequestMapping("users")
+@Validated
+public class UserController {
+
+        @GetMapping("{id}")
+        public Optional<User> getUser(@PathVariable @Positive Long id) {
+        }
+        
+        
+ 
+}
 
 
 
