@@ -2,4 +2,6 @@ fuse deploy
 https://access.redhat.com/documentation/en-us/red_hat_jboss_fuse/6.1/html/deploying_into_the_container/DeployFeatures
 https://access.redhat.com/documentation/en-us/red_hat_jboss_fuse/6.2.1/html/deploying_into_apache_karaf/ESBDeployLocateRunTime#Locate-RunTime-ConfigRef
 
+deploy with fearute file in local
 
+file:///app/bddeployment/catalyst/externalapi/cl-esb-externalapi.xml
