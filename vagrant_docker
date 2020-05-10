@@ -1,0 +1,8 @@
+How to Automate Docker on Vagrant
+
+
+ config.vm.provision :shell, inline: "apt-get update"
+  config.vm.provision :docker
+  config.vm.provision :docker_login, username: "<username>", email: "<em>",   password: "<password>"
+  config.vm.provision :docker_compose, yml: ["/vagrant/docker-compose.yml"]
+end
