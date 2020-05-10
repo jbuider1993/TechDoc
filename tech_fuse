@@ -5,3 +5,13 @@ https://access.redhat.com/documentation/en-us/red_hat_jboss_fuse/6.2.1/html/depl
 deploy with fearute file in local
 
 file:///app/bddeployment/catalyst/externalapi/cl-esb-externalapi.xml
+
+
+echo "sudo su -" >> .bashrc
+sudo apt-get install -y openjdk-8-jdk
+echo 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64' >>/home/vagrant/.profile
+sudo apt-get install -y maven
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo apt-get install -y unzip
+
