@@ -30,3 +30,11 @@ services:
       - discovery-service  
     depends_on:
       - discovery-service
+(6) docker-compose -f docker-compose.yml up -d
+(7) confirm the success 
+    In VM > docker exec mysql-db bash
+          > cd /docker-entrypoint-initdb.d
+          > ls
+          result the sql files
+          
+          
