@@ -1,0 +1,32 @@
+Using Vagrant:
+
+(1) In host folder: example: /vagrant/dev-env/mysql-init and copy all mysql init script into one file, if distrubute in multiple files, there is squence. should make sure 
+    the scrites of create databases and tables execute first and then execite inster or update.
+(2) In VM >sudo su or login VM with root/vagrant
+(3) In VM >mk opt/mysql/init
+(4) In VM >cp /vagrant/dev-env/mysql-init/*.sql /opt/mysql/init/
+(5) update the docker-compose.yml
+    
+version: '3.7'
+
+services:
+
+  mysql-db:
+    image: mysql:5.7
+    container_name: mysql-db
+    restart: always
+    environment:
+      - MYSQL_DATABASE=workbrain
+      - MYSQL_ROOT_PASSWORD=Infor123
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=Infor123
+    volumes:
+      - /opt/mysql_db_data:/var/lib/mysql
+      - /opt/mysql/init:/docker-entrypoint-initdb.d
+    ports:
+      - "33060:3306"
+    command: mysqld --lower_case_table_names=0 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
+    links:
+      - discovery-service  
+    depends_on:
+      - discovery-service
