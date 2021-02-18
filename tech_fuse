@@ -15,3 +15,93 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo apt-get install -y unzip
 
+Jboss FUSE env setup
+https://www.tutorialspoint.com/jboss_fuse/jboss_fuse_quick_guide.htm
+
+Configure
+After you unzip Fuse, you will find the following directories inside the extracted Directory −
+
+bin
+etc
+deploy
+lib
+licenses
+extras
+quickstarts
+Out of which we are going to use only two directories bin & etc.
+
+Virtually after extracting Fuse, we should be able to start fuse directly, but this will start Fuse with all the default configurations which is not advisable for production environment. It is strongly recommended to do the following changes before starting Fuse.
+
+Set Environment variables
+Set the following Environment variables – JAVA_HOME
+
+The variable should point to the java installation directory – M2_HOME
+
+The variable should point to Maven installation directory – PATH
+
+Set the path variable to include Java & Maven executables.
+
+Windows
+On windows, settings can be done by following the below given instructions −
+
+Start → My Computer → Right Click → Properties → Advanced System settings → Environment variables.
+
+UNIX & Clones
+For each user there is a bash profile in the *nix operating systems. We can add or edit the existing system variable by changing this file.
+
+$ vi ~/.bash_proflle
+
+Note − Any changes in this file are permanent. It is highly recommended to take a backup of the existing file before changing the original.
+
+Basic Configuration
+We will discuss about the basic configuration of JBoss Fuse and for that we have to start with the following command Edit $FUSE_INSTALLATION_DIR/etc/
+
+In user.properties
+
+#admin=admin,admin
+
+This needs to be changed according to the first admin with username we want, second admin with password, third one might be kept as it is because it indicates a role and don’t forget to remove #
+
+For example – FuseAdmin = FusePAss,admin
+
+Basic Configuration
+In System.properties
+
+karafName = root
+
+This indicates the name you want to give to Karaf instance.
+
+We can name it anything we want like Cont1.
+
+Make sure this name you give is unique name and not already being used by another instance of Fuse.
+
+In org.ops4j.pax.web.cfg
+
+Org.osgi.service.http.port = 8181
+
+This property indicates the port that is to be used for accessing browser-based interface HAWTIO provided by Fuse
+
+HAWTIO is an in-built browser interface to Fuse which is available from 6.0 onwards
+
+In org.ops4j.pax.url.mvn.cfg
+
+org.ops4j.pax.url.mvn.localRepository = D:/repository
+
+This property indicates the path to localRepository of our Maven from where Fuse will install its artifacts.
+
+org.ops4j.pax.url.mvn.settings = D:/Maven/conf/settings.xml
+
+This property indicates settings.xml which Fuse should use to get artifacts from Maven.
+
+Configuring Maven
+Maven is a prerequisite for installing Fuse. If you don’t know what maven is please refer to http://www.tutorialspoint.com/maven/
+
+Maven is a built tool used for building Fuse artifacts. Fuse first searches in Maven local repository for artifacts when we issue command to install artifact. So we must let Fuse know where Maven is installed and the path of Maven’s local repository.
+
+Edit $FUSE_INSTALLATION_DIR/etc/org.ops4j.paxurl.mvn.cfg
+
+Update the following two properties −
+
+org.ops4j.pax.url.mvn.settings = $M2_HOME/conf /settings.xml
+org.ops4j.pax.url.mvn.localRepository = $local_repo
+Note − Please change $local_repo with the actual path of your local repository mentioned in Mavens settings.xml.
