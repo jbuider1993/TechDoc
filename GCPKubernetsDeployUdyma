@@ -41,4 +41,12 @@ helm install my-release ingress-nginx/ingress-nginx
    
 4) GCP Create service account:
    I AM --> service account ---> create account ---> key-tab "add key"
+5) Traivs GCP decode service account json
+
+   docker run -it -v $(pwd):/app ruby:2.3 sh  --copy the serviceaccount.json to host current folder in the docker container mapping ot /app
+   gem install travis --no-rdoc --no-ri
+   travis encrypt-file service-account.json -r jbuilder1993@gmail.com/hcm  //github project
+   
+   
+   
    
