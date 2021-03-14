@@ -6,13 +6,7 @@ Clone down the entire Github repo to your computer. Go to draw.io, then choose "
 
 Source code:
 https://github.com/StephenGrider/DockerCasts
-
-
-
-
-
 https://www.udemy.com/course/microservices-with-node-js-and-react/?couponCode=CBD1840C8AEA8BF53C59
-
 
 1) GCP platform:
 - gcloud components update kubectl
@@ -22,14 +16,24 @@ https://www.udemy.com/course/microservices-with-node-js-and-react/?couponCode=CB
 - gcloud container clusters get-credentials cluster-1
 
 2) Install Ingress service
-  1) install helm
+  1) install helm
     curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
     chmod 700 get_helm.sh
     ./get_helm.sh
+	
+ kubectl create serviceaccount --namespace kube-system tiller
+  //tiller is serviceaccount name
+  //when assign it a Role should using namespace:name
+  //when using it can direct using the 'name'
+  kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller  
+  ??? kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'  
+  helm init --service-account tiller --upgrade
+	
+	
+	
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install my-release ingress-nginx/ingress-nginx
 
 3) app deploy
    upload *.yaml
    kubectl apply -f ./
-   
