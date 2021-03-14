@@ -51,5 +51,11 @@ helm install my-release ingress-nginx/ingress-nginx
 The Travis login now requires a Github Token. Please follow these instructions to create a Personal Token for Travis to use here:
 https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token
 ===================================================================================================================================================
-   
-   
+travis  encode the servieaccount.json
+docker run -it -v $(pwd):/app ruby:3.0 sh
+gem install travis 
+travis login --github-token 3be601bcf2ee42c1cb1afeb7d52adf5d682e6a1f --pro
+//https://www.travis-ci.com/github/jbuider1993
+travis encrypt-file hcmserviceaccount.json -r jbuider1993/autoCode2  --pro
+travis encrypt-file hcmserviceaccount.json -r jbuider1993/HCM  --pro
+
