@@ -15,8 +15,6 @@ https://www.udemy.com/course/microservices-with-node-js-and-react/?couponCode=CB
 
 
 1) GCP platform:
-
-
 - gcloud components update kubectl
 // - gcloud auth activate-service-account --key-file service-account.json
 - gcloud config set project abstract-dragon-284619
@@ -24,8 +22,10 @@ https://www.udemy.com/course/microservices-with-node-js-and-react/?couponCode=CB
 - gcloud container clusters get-credentials cluster-1
 
 2) Install Ingress service
-
-
+  1) install helm
+    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+    chmod 700 get_helm.sh
+    ./get_helm.sh
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install my-release ingress-nginx/ingress-nginx
 
