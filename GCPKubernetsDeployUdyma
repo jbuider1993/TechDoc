@@ -12,3 +12,24 @@ https://github.com/StephenGrider/DockerCasts
 
 
 https://www.udemy.com/course/microservices-with-node-js-and-react/?couponCode=CBD1840C8AEA8BF53C59
+
+
+1) GCP platform:
+
+
+- gcloud components update kubectl
+// - gcloud auth activate-service-account --key-file service-account.json
+- gcloud config set project abstract-dragon-284619
+- gcloud config set compute/zone us-central1-c
+- gcloud container clusters get-credentials cluster-1
+
+2) Install Ingress service
+
+
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install my-release ingress-nginx/ingress-nginx
+
+3) app deploy
+   upload *.yaml
+   kubectl apply -f ./
+   
