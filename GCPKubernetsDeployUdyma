@@ -28,9 +28,7 @@ https://www.udemy.com/course/microservices-with-node-js-and-react/?couponCode=CB
   kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller  
   ??? kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'  
   helm init --service-account tiller --upgrade
-	
-	
-	
+		
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install my-release ingress-nginx/ingress-nginx
 
@@ -49,7 +47,9 @@ helm install my-release ingress-nginx/ingress-nginx
    //travis encrypt-file service-account.json -r USERNAME/REPO --pro
    travis encrypt-file service-account.json -r jbuilder1993@gmail.com/hcm  --pro //github project
    
-   
-   
+===================================================================================================================================================  
+The Travis login now requires a Github Token. Please follow these instructions to create a Personal Token for Travis to use here:
+https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token
+===================================================================================================================================================
    
    
