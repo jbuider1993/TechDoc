@@ -59,3 +59,10 @@ travis login --github-token 3be601bcf2ee42c1cb1afeb7d52adf5d682e6a1f --pro
 travis encrypt-file hcmserviceaccount.json -r jbuider1993/autoCode2  --pro
 travis encrypt-file hcmserviceaccount.json -r jbuider1993/HCM  --pro
 
+-------------------------------------------------
+travis add gitbuh repo
+-------------------------------------------------
+https://travis-ci.com/account/repositories
+---> Migrate Tab--->"Activate all repositories using GitHub Apps"
+
+
