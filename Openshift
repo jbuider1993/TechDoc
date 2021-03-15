@@ -1,0 +1,4 @@
+minishift start --vm-driver hyperkit
+minishift start --vm-driver hyperkit --show-libmachine-logs --logtostderr -v5
+minishift config set vm-driver virtualbox
+minishift start --vm-driver virtualbox
