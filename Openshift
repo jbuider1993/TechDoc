@@ -1,4 +1,5 @@
 minishift start --vm-driver hyperkit
 minishift start --vm-driver hyperkit --show-libmachine-logs --logtostderr -v5
 minishift config set vm-driver virtualbox
+minishift --profile springboot_msa_on_k8s --memory=4096 --cpus=2 start (1)
 minishift start --vm-driver virtualbox
