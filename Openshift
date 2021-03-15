@@ -3,3 +3,11 @@ minishift start --vm-driver hyperkit --show-libmachine-logs --logtostderr -v5
 minishift config set vm-driver virtualbox
 minishift --profile springboot_msa_on_k8s --memory=4096 --cpus=2 start (1)
 minishift start --vm-driver virtualbox
+
+
+minishift addons install --defaults
+minishift addons enable admin-user
+minishift start
+oc adm policy --as system:admin add-cluster-role-to-user cluster-admin developer
+minishift console
+
