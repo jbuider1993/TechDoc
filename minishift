@@ -1,0 +1,6 @@
+Setting Up Minishift to Use VirtualBox
+Use VirtualBox Temporarily
+$ minishift start --vm-driver virtualbox
+Use VirtualBox Permanently
+$ minishift config set vm-driver virtualbox
+
