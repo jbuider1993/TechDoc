@@ -56,8 +56,23 @@ docker run -it -v $(pwd):/app ruby:3.0 sh
 gem install travis 
 travis login --github-token 3be601bcf2ee42c1cb1afeb7d52adf5d682e6a1f --pro
 //https://www.travis-ci.com/github/jbuider1993
-travis encrypt-file hcmserviceaccount.json -r jbuider1993/autoCode2  --pro
-travis encrypt-file hcmserviceaccount.json -r jbuider1993/HCM  --pro
+travis encrypt-file ./app/hcmserviceaccount.json -r jbuider1993/autoCode2  --pro
+travis encrypt-file ./app/hcmserviceaccount.json -r jbuider1993/HCM  --pro
+
+travis encrypt-file ./app/googlegcpaccount.json -r jbuider1993/hcmtest  --pro
+---->>>
+Please add the following to your build script (before_install stage in your .travis.yml, for instance):
+
+    openssl aes-256-cbc -K $encrypted_177f44202b14_key -iv $encrypted_177f44202b14_iv -in googlegcpaccount.json.enc -out googlegcpaccount.json -d
+
+Pro Tip: You can add it automatically by running with --add.
+<<<----
+
+Make sure to add googlegcpaccount.json.enc to the git repository.
+Make sure not to add googlegcpaccount.json to the git repository.
+Commit all changes to your .travis.yml.
+
+
 
 -------------------------------------------------
 travis add gitbuh repo
