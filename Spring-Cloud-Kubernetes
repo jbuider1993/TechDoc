@@ -4,3 +4,4 @@ https://piotrminkowski.com/2019/12/20/microservices-with-spring-cloud-kubernetes
 https://github.com/piomin/sample-spring-microservices-kubernetes/tree/hybrid
 
 https://docs.spring.io/spring-boot/docs/2.1.x/reference/html/boot-features-external-config.html
+https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
