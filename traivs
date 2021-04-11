@@ -1,5 +1,14 @@
 deploy:
   - provider: script
+    script: bash myscript.sh
+    verbose: true
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^release\/.*$ && $TRAVIS_OS_NAME = linux
+	  
+	  
+deploy:
+  - provider: script
     script: deploy_production.sh
     on:
       branch: production
@@ -7,4 +16,40 @@ deploy:
     script: deploy_staging.sh
     on:
       branch: staging
+	  
+matrix:
+  include:
+  - language: java
+    jdk: oraclejdk13
+    cache:
+      directories:
+      - "$HOME/.m2"
+    deploy:
+      provider: script
+      script: mvn deploy -Drun.jpa.tests=false
+      on:
+        branches:
+          only:
+            - features/impl-aws-sign-up-ws`
+
+os:
+  - linux
+  - osx
+  - windows
+
+stages:
+  - test
+  - name: deploy
+    if: tag IS present
+
+jobs:
+  include:
+    - stage: test
+      script: npm test
+    - stage: deploy
+      script: npm run travis
+      deploy:
+        provider: releases
+		
+		
 	
