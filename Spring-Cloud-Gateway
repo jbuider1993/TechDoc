@@ -6,3 +6,5 @@ https://www.baeldung.com/spring-cloud-gateway
 http://localhost/actuator/gateway/routes/baeldung_route
 
 https://gitee.com/zlt2000/microservices-platform
+
+https://developer.okta.com/blog/2019/04/01/spring-boot-microservices-with-kubernetes
