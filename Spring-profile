@@ -13,5 +13,7 @@ We can pass profile information to Spring Boot using the switch through command 
 
 java -jar javadevjournal.jar -Dspring.config.additional-location="external_file_location"
 
-java -jar javadevjournal.jar —spring.profiles.active=development,staging
+java -jar javadevjournal.jar -—spring.profiles.active=development,staging
+
+java -jar ./target/employee-service.jar  --spring.profiles.active=local
 
