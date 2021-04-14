@@ -1,0 +1,17 @@
+Spring Profile (Environment Specific Files)
+
+
+application-local.properties
+application-dev.properties
+application-staging.properties
+application-prod.properties
+
+spring.profiles.active=staging
+
+(1) Using Command Line
+We can pass profile information to Spring Boot using the switch through command prompt —spring.profiles.active=development,staging
+
+java -jar javadevjournal.jar -Dspring.config.additional-location="external_file_location"
+
+java -jar javadevjournal.jar —spring.profiles.active=development,staging
+
