@@ -8,3 +8,6 @@ https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 https://kubernetes.io/docs/tasks/access-application-cluster/communicate-containers-same-pod-shared-volume/
 
 https://developer.okta.com/blog/2019/04/01/spring-boot-microservices-with-kubernetes
+
+spring boot example:
+https://github.com/xuyisu/fw-spring-cloud
