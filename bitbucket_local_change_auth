@@ -1,0 +1,7 @@
+
+In windows command line:
+
+(1) rundll32.exe keymgr.dll,KRShowKeyMgr
+(2) double click what your url; then change the password or username
+
+
