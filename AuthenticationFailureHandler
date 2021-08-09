@@ -177,7 +177,10 @@ In WebSecurityConfig.java
   
   
 
-
+=======================================================
+Example for the JWT and Angular HttpInteceptor
+https://www.bezkoder.com/angular-12-refresh-token/
+=======================================================
 
 
 
