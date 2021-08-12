@@ -1,3 +1,7 @@
+Tech web side:
+https://www.bezkoder.com
+https://www.bezkoder.com/angular-10-file-upload/
+
 Github token : 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
 
 
