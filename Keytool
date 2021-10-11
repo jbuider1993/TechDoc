@@ -4,3 +4,8 @@ C:/tools/java/jdk1.8.0_201/jre/bin/keytool -import  -certreq -alias catalyststor
 
 
 C:/tools/java/jdk1.8.0_201/jre/bin/keytool -v -list -keystore catalyst.jks
+
+===================================================================================
+How to implement 2-way SSL using Spring Boot
+https://www.aurigait.com/blog/how-to-implement-2-way-ssl-using-spring-boot/
+===================================================================================
