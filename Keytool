@@ -1,0 +1,6 @@
+C:/tools/java/jdk1.8.0_201/jre/bin/keytool -genkey -alias catalyststory -keyalg RSA -sigalg SHA256withRSA -keysize 2048 -keypass catalyst -dname "CN=server.domain.whatever, OU=TCS, O=Infor, L=City ST=ON C=CA" -keystore catalyst.jks -storepass catalyst -validity 360 
+C:/tools/java/jdk1.8.0_201/jre/bin/keytool -importkeystore -srckeystore catalyst.jks -destkeystore catalyst.jks -deststoretype pkcs12
+C:/tools/java/jdk1.8.0_201/jre/bin/keytool -import  -certreq -alias catalyststory -keystore catalyst.jks -keypass catalyst -trustcacerts -file sortspoke.cer
+
+
+C:/tools/java/jdk1.8.0_201/jre/bin/keytool -v -list -keystore catalyst.jks
