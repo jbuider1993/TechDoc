@@ -1,0 +1,7 @@
+https://medium.com/@amitbhoraniya/spring-boot-with-osgi-25d2387a459e
+
+What is OSGi?
+The OSGi framework is a standardized module system and service platform for the Java programming language. The OSGi standards has both open-source and commercial implementations. Below are some popular open source implementations of OSGi.
+Apache Felix
+Eclipse Equinox
+Any OSGi application runs on any of above OSGi container and application will be developed as a Module/Plugins. Here is a OSGi plugin lifecycle. So once OSGi container started you can install, uninstall, start and stop plugin at runtime. One plugin may dependent on other plugin also.
