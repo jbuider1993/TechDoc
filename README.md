@@ -1,3 +1,7 @@
+LEARN K8
+https://learnk8s.io
+
+
 GITHUB: personal token:   
 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
 
