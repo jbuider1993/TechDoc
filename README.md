@@ -1,5 +1,6 @@
 LEARN K8
 https://learnk8s.io
+https://kubernetes.io/docs/tutorials
 
 
 GITHUB: personal token:   
