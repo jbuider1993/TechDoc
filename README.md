@@ -1,3 +1,7 @@
+Install K8S in Local with vagrant:
+k8s-vagrant-virtualbox
+https://github.com/LocusInnovations/k8s-vagrant-virtualbox
+
 
 WSO2 ARCHITECTURE FOR AGILITY
 https://github.com/wso2/reference-architecture
