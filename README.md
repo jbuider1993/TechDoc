@@ -1,3 +1,6 @@
+LEARN
+https://www.bogotobogo.com/index.php
+
 Install K8S in Local with vagrant:
 k8s-vagrant-virtualbox
 https://github.com/LocusInnovations/k8s-vagrant-virtualbox
