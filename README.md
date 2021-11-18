@@ -1,3 +1,12 @@
+SOAP Service:
+FROM WSDL to JAVA
+https://mkyong.com/webservices/jax-ws/jax-ws-wsimport-tool-example/
+
+The wsimport tool is used to parse an existing Web Services Description Language (WSDL) file and generate required files (JAX-WS portable artifacts) for web service client to access the published web services. This wsimport tool is available in the $JDK/bin folder.
+
+wsimport -keep -verbose http://compA.com/ws/server?wsdl
+
+
 LEARN
 https://www.bogotobogo.com/index.php
 
