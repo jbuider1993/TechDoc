@@ -42,7 +42,7 @@ https://www.bezkoder.com
 https://www.bezkoder.com/angular-10-file-upload/
 
 Github token : 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
-
+Dockerhub token: 2d98a2ef-f8a4-4490-845b-01d070f8d531
 
 
 DevOps environment:
