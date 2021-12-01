@@ -1,3 +1,7 @@
+OAUTH2--
+
+https://developpaper.com/java-security-framework/
+
 SOAP Service:
 FROM WSDL to JAVA
 https://mkyong.com/webservices/jax-ws/jax-ws-wsimport-tool-example/
