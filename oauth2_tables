@@ -62,3 +62,17 @@ create table if not exists ClientDetails ( /*Q10: Yet another client details???*
   additionalInformation VARCHAR(4096),
   autoApproveScopes VARCHAR(255)
 );
+
+
+
+
+Q1: Yes
+Q2: N/A
+Q3: Yes
+Q4: Yes. Note: oauth_client_details supports for JdbcClientDetailsService. You can create your ClientDetailsService implementation with your customized table.
+Q5: Client scopes which are automatically approved by authorization server, supports for Authorization Code flow
+Q6: This table is used by JdbcClientTokenServices
+Q7: Yes, this table supports for JwtTokenStore
+Q8: Yes, this table supports for JwtTokenStore
+Q9: Store approval status, supports for Authorization Code flow
+Q10: Just a customized oauth_client_details if you want
