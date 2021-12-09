@@ -1,3 +1,6 @@
+https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2
+https://stackoverflow.com/questions/50795573/spring-boot-oauth2-provider-database-tables-explained
+
 create table oauth_client_details (      /*Stores client details*/
   client_id VARCHAR(255) PRIMARY KEY,
   resource_ids VARCHAR(255),             /*Q1: is this comma separated list of resources?*/
