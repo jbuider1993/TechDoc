@@ -1,0 +1,9 @@
+		<dependency>
+		    <groupId>io.jsondb</groupId>
+		    <artifactId>jsondb-core</artifactId>
+		    <version>1.0.85</version>
+		</dependency>
+
+BaseX JsonDB
+https://basex.org/
+
