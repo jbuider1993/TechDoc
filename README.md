@@ -1,3 +1,6 @@
+JAVA Utils
+https://util.jodd.org/
+
 Infoworld
 https://www.infoworld.com/article/2074101/java-product-news---updated-march-1--2002-.html
 
