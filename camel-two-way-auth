@@ -1,0 +1,27 @@
+    <http:conduit name=".*">
+        <http:tlsServerParameters disableCNCheck="true">
+		    <sec:clientAuthentication want="true" required="true" />
+            <sec:keyManagers keyPassword="${KEYSTOREPASS}">
+                <sec:keyStore file="${TRUSTSTORELOC}"
+                    password="${KEYSTOREPASS}" type="JKS"/>
+            </sec:keyManagers>
+            <sec:trustManagers>
+                <sec:keyStore file="${TRUSTSTORELOC}"
+                    password="${KEYSTOREPASS}" type="JKS"/>
+            </sec:trustManagers>
+        </http:tlsServerParameters>
+		
+        <http:tlsClientParameters disableCNCheck="true">
+            <sec:keyManagers keyPassword="${KEYSTOREPASS}">
+                <sec:keyStore file="${TRUSTSTORELOC}"
+                    password="${KEYSTOREPASS}" type="JKS"/>
+            </sec:keyManagers>
+            <sec:trustManagers>
+                <sec:keyStore file="${TRUSTSTORELOC}"
+                    password="${KEYSTOREPASS}" type="JKS"/>
+            </sec:trustManagers>
+        </http:tlsClientParameters>		
+		
+        <http:client AutoRedirect="true" Connection="Keep-Alive"/>
+		
+    </http:conduit>
