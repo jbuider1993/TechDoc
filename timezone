@@ -1,0 +1,40 @@
+http://www.java2s.com/Tutorials/Java/Java_Date_Time/0150__Java_Custom_Date_Format_Patterns.htm
+
+Z
+Zone offset
+Example:
+    Z      -0500
+    ZZ     -0500
+    ZZZ    -05:00
+    ZZZZ   GMT-05:00
+    
+O
+Localized zone offset
+Example:
+O   GMT-5
+X
+Zone offset
+Example:
+        X       +09
+        XX      +0930 
+        XXX     +09:30
+        XXX     -05:00
+        XXXX    +093045
+        XXXXX   +08:30:45
+    
+x
+Same as X, except that it prints '+00' for the zone offset zero, not 'Z'.
+Example:
+xx -0500
+
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[ZZZ]]");
+		
+		String dateString = "2022-03-23T00:00:00";
+		
+		parseDateFromString("2019-05-31");
+		parseDateFromString("2019-05-31T16:30:12");
+		parseDateFromString("2022-05-31T00:00:00+04:00");
+		parseDateFromString("2019-05-31Hello");		
+
+
