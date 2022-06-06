@@ -1,0 +1,31 @@
+
+import javax.xml.soap.SOAPElement;
+import javax.xml.soap.SOAPEnvelope;
+import javax.xml.soap.SOAPException;
+import javax.xml.soap.SOAPHeader;
+import javax.xml.soap.SOAPMessage;
+import javax.xml.ws.handler.MessageContext;
+import javax.xml.ws.handler.soap.SOAPHandler;
+import javax.xml.ws.handler.soap.SOAPMessageContext;
+
+https://tomee.apache.org/examples-trunk/webservice-handlerchain/
+
+
+handler-chain-vinvalidation.xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<javaee:handler-chains 
+     xmlns:javaee="http://java.sun.com/xml/ns/javaee" 
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <javaee:handler-chain>
+    <javaee:handler>
+      <javaee:handler-class> com.info.esb.vinvalidation.handler.VinValidationHeaderHandler</javaee:handler-class>
+    </javaee:handler>
+  </javaee:handler-chain>
+</javaee:handler-chains>
+
+put the handler-chain-vinvalidation.xml under classpath or should under classpath same where is the class using @HandlerChain package path in resouce folder.
+
+@HandlerChain(file="classpath: /handler-chain-vinvalidation.xml")
+
+
+public class VinValidationHeaderHandler implements SOAPHandler<SOAPMessageContext> {}
