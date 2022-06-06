@@ -1,4 +1,4 @@
-
+(1) solution 1
 import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPException;
@@ -30,6 +30,9 @@ put the handler-chain-vinvalidation.xml under classpath or should under classpat
 
 public class VinValidationHeaderHandler implements SOAPHandler<SOAPMessageContext> {}
 
+
+
+(2) solution 2
 
 
 import java.io.ByteArrayOutputStream;
@@ -149,3 +152,16 @@ public class HeaderHandler implements SOAPHandler<SOAPMessageContext> {
 	}
 }
 
+
+
+
+
+	<jaxws:client address="{{ABC_SURETY_BROKER_CHANGE_URL}}"
+		id="abcSuretyBrokerChangeProxy" serviceClass="ca.xenex.surety.ejb.webservice.BrokerChange">
+		<jaxws:handlers>
+			<bean class="com.info.ca.handler.HeaderHandler" />
+		</jaxws:handlers>
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:client>
