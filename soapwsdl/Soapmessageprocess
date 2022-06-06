@@ -9,6 +9,7 @@ import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 
 https://tomee.apache.org/examples-trunk/webservice-handlerchain/
+https://tomee.apache.org/examples-trunk/
 
 
 handler-chain-vinvalidation.xml
