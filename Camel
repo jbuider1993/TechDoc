@@ -50,3 +50,7 @@ https://github.com/apache/camel-spring-boot/blob/main/pom.xml
         <swagger-parser-v3-version>2.0.31</swagger-parser-v3-version>
         <undertow-version>2.2.16.Final</undertow-version>
     </properties>
+    
+    =======================================================================================
+    https://hawt.io/docs/get-started/
+    =======================================================================================
