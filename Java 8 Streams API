@@ -1,0 +1,73 @@
+https://www.benchresources.net/java-8-find-first-and-last-entries-in-a-map-or-hashmap/
+
+Java 8 – Find First and Last entries in a Map or HashMap
+
+Find First and Last elements in HashMap
+Using Java 8 Streams API
+Before Java 8 release
+Using if-else statements while iterating
+Using ArrayList to store Map Keys
+Using Arrays to store Map Keys
+1. Using Java 8 Streams API
+To find first entry in a HashMap, we can use findFirst() method of Stream API which returns Optional<T> and
+We can invoke get() method on Optional<T> to obtain the final result
+Similarly, to get last element from HashMap, we can use reduce() method of Stream API which returns Optional<T> and
+We can invoke get() method on Optional<T> to obtain the final result
+FindFirstAndLastEntryInMapInJava8.java
+
+package in.bench.resources.find.map;
+ 
+import java.util.HashMap;
+import java.util.Map;
+ 
+public class FindFirstAndLastEntryInMapInJava8 {
+ 
+    public static void main(String[] args) {
+ 
+        // local variables
+        Map.Entry<Integer, String> firstEntry = null, lastEntry = null;
+ 
+ 
+        // create HashMap object
+        Map<Integer, String> companies = new HashMap<>();
+ 
+ 
+        // add entries to newly created HashMap
+        companies.put(1, "Amazon");
+        companies.put(2, "Microsoft");
+        companies.put(3, "Google");
+        companies.put(4, "Apple");
+        companies.put(5, "Meta");
+ 
+ 
+        // print all entries to console
+        System.out.println("Map entries :- \n");
+        companies.entrySet().stream().forEach(System.out::println);
+ 
+ 
+        // find First entry in HashMap
+        firstEntry = companies.entrySet().stream().findFirst().get();
+ 
+ 
+        // find Last entry in HashMap
+        lastEntry = companies.entrySet().stream().reduce((one, two) -> two).get();
+ 
+ 
+        // print to console
+        System.out.println("\n\nFirst entry in the Map is " + firstEntry);
+        System.out.println("Last entry in the Map is " + lastEntry);
+    }
+}
+Output:
+
+Map entries :- 
+ 
+1=Amazon
+2=Microsoft
+3=Google
+4=Apple
+5=Meta
+ 
+ 
+First entry in the Map is 1=Amazon
+Last entry in the Map is 5=Meta
