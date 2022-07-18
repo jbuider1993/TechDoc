@@ -28,3 +28,70 @@ github.com/orgs/structurizr/repositories
 https://github.com/davidmoten/openapi-to-plantuml
 ======================================================================
 
+import net.sourceforge.plantuml.FileFormat;
+import net.sourceforge.plantuml.FileFormatOption;
+import net.sourceforge.plantuml.SourceStringReader;
+import net.sourceforge.plantuml.core.ImageData;
+import net.sourceforge.plantuml.cucadiagram.Display;
+import net.sourceforge.plantuml.sequencediagram.Message;
+import net.sourceforge.plantuml.sequencediagram.Participant;
+import net.sourceforge.plantuml.sequencediagram.SequenceDiagram;
+import net.sourceforge.plantuml.sequencediagram.SequenceDiagramFactory;
+import net.sourceforge.plantuml.skin.ArrowConfiguration;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import static com.google.common.base.Preconditions.checkState;
+
+public class PlantUMLDemoMain {
+    public static void main(String[] args) throws Exception {
+        generateFromStringSource(new File("from-string.png"));
+        generateFromApi(new File("from-api.png"));
+    }
+
+    private static void generateFromApi(File file) throws IOException {
+        // 1. setup:
+        SequenceDiagramFactory f = new SequenceDiagramFactory();
+        SequenceDiagram diagram = f.createEmptyDiagram();
+
+        // 2. Build the diagram:
+        // "Bob -> Alice : hello"
+        // See net.sourceforge.plantuml.sequencediagram.command.CommandArrow#executeArg
+        Display bobD = Display.getWithNewlines("Bob");
+        Participant bobP = diagram.getOrCreateParticipant("Bob", bobD);
+
+        Display aliceD = Display.getWithNewlines("Alice");
+        Participant aliceP = diagram.getOrCreateParticipant("Alice", aliceD);
+
+        Display label = Display.getWithNewlines("hello");
+        ArrowConfiguration config = ArrowConfiguration.withDirectionNormal();
+
+        Message msg = new Message(bobP, aliceP, label, config, diagram.getNextMessageNumber());
+
+        checkState(null == diagram.addMessage(msg));
+
+        // 3. Output the diagram
+        // See net.sourceforge.plantuml.SourceStringReader#generateImage
+        diagram.makeDiagramReady();
+        checkState(1 == diagram.getNbImages());
+        try (OutputStream os = new FileOutputStream(file)) {
+            ImageData imageData = diagram.exportDiagram(os, 0, new FileFormatOption(FileFormat.PNG));
+            System.out.println("generateFromApi: " + diagram.getDescription().getDescription());
+        }
+    }
+
+    private static void generateFromStringSource(File file) throws IOException {
+        String source = "@startuml\n";
+        source += "Bob -> Alice : hello\n";
+        source += "@enduml\n";
+
+        SourceStringReader reader = new SourceStringReader(source);
+        // Write the first image to "png"
+        String desc = reader.generateImage(file);
+        // Return a null string if no generation
+        System.out.println("generateFromStringSource: " + desc);
+    }
+}
