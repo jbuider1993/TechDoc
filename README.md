@@ -1,3 +1,7 @@
+Who Auto https://dzone.com/articles/automating-microservices-on-aws
+https://dzone.com/articles/automating-microservices-on-aws
+
+
 JAVA Utils
 https://util.jodd.org/
 
