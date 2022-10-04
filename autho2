@@ -231,3 +231,37 @@ public WebClient oauthFilteredWebClient(final ReactiveClientRegistrationReposito
         .filter(oAuthFilter)
         .build();
 }
+
+
+
+Configure WebClient
+The ServerOAuth2AuthorizedClientExchangeFilterFunction.setClientCredentialsTokenResponseClient() method has been deprecated, so following the deprecation advice from that method:
+
+Deprecated. Use ServerOAuth2AuthorizedClientExchangeFilterFunction(ReactiveOAuth2AuthorizedClientManager) instead. Create an instance of ClientCredentialsReactiveOAuth2AuthorizedClientProvider configured with a WebClientReactiveClientCredentialsTokenResponseClient (or a custom one) and than supply it to DefaultReactiveOAuth2AuthorizedClientManager.
+
+This ends up with configuration looking something like:
+
+@Bean("oAuth2WebClient")
+public WebClient oauthFilteredWebClient(final ReactiveClientRegistrationRepository 
+    clientRegistrationRepository)
+{
+    final ClientCredentialsReactiveOAuth2AuthorizedClientProvider
+        clientCredentialsReactiveOAuth2AuthorizedClientProvider =
+            new ClientCredentialsReactiveOAuth2AuthorizedClientProvider();
+    clientCredentialsReactiveOAuth2AuthorizedClientProvider.setAccessTokenResponseClient(
+        new UaaWebClientReactiveClientCredentialsTokenResponseClient());
+
+    final DefaultReactiveOAuth2AuthorizedClientManager defaultReactiveOAuth2AuthorizedClientManager =
+        new DefaultReactiveOAuth2AuthorizedClientManager(clientRegistrationRepository,
+            new UnAuthenticatedServerOAuth2AuthorizedClientRepository());
+    defaultReactiveOAuth2AuthorizedClientManager.setAuthorizedClientProvider(
+        clientCredentialsReactiveOAuth2AuthorizedClientProvider);
+
+    final ServerOAuth2AuthorizedClientExchangeFilterFunction oAuthFilter =
+        new ServerOAuth2AuthorizedClientExchangeFilterFunction(defaultReactiveOAuth2AuthorizedClientManager);
+    oAuthFilter.setDefaultClientRegistrationId("uaa");
+
+    return WebClient.builder()
+        .filter(oAuthFilter)
+        .build();
+}
