@@ -206,3 +206,28 @@ public class OAuthRestTemplateConfig {
     }
 }
 
+===============================================================================================
+@Bean("oAuth2WebClient")
+public WebClient oauthFilteredWebClient(final ReactiveClientRegistrationRepository 
+    clientRegistrationRepository)
+{
+    final ClientCredentialsReactiveOAuth2AuthorizedClientProvider
+        clientCredentialsReactiveOAuth2AuthorizedClientProvider =
+            new ClientCredentialsReactiveOAuth2AuthorizedClientProvider();
+    clientCredentialsReactiveOAuth2AuthorizedClientProvider.setAccessTokenResponseClient(
+        new UaaWebClientReactiveClientCredentialsTokenResponseClient());
+
+    final DefaultReactiveOAuth2AuthorizedClientManager defaultReactiveOAuth2AuthorizedClientManager =
+        new DefaultReactiveOAuth2AuthorizedClientManager(clientRegistrationRepository,
+            new UnAuthenticatedServerOAuth2AuthorizedClientRepository());
+    defaultReactiveOAuth2AuthorizedClientManager.setAuthorizedClientProvider(
+        clientCredentialsReactiveOAuth2AuthorizedClientProvider);
+
+    final ServerOAuth2AuthorizedClientExchangeFilterFunction oAuthFilter =
+        new ServerOAuth2AuthorizedClientExchangeFilterFunction(defaultReactiveOAuth2AuthorizedClientManager);
+    oAuthFilter.setDefaultClientRegistrationId("uaa");
+
+    return WebClient.builder()
+        .filter(oAuthFilter)
+        .build();
+}
