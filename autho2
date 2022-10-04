@@ -177,5 +177,32 @@ public class OAuthRestTemplateConfig {
 
 
 
+ @Configuration
+    public class WebClientConfig {
 
+    public static final String TEST_REGISTRATION_ID = "test-client";
+
+    @Bean
+    public ReactiveClientRegistrationRepository clientRegistrationRepository() {
+        var clientRegistration = ClientRegistration.withRegistrationId(TEST_REGISTRATION_ID)
+                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .clientId("<client_id>")
+                .clientSecret("<client_secret>")
+                .tokenUri("<token_uri>")
+                .build();
+        return new InMemoryReactiveClientRegistrationRepository(clientRegistration);
+    }
+
+    @Bean
+    public WebClient testWebClient(ReactiveClientRegistrationRepository clientRegistrationRepo) {
+
+        var oauth = new ServerOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrationRepo,  new UnAuthenticatedServerOAuth2AuthorizedClientRepository());
+        oauth.setDefaultClientRegistrationId(TEST_REGISTRATION_ID);
+
+        return WebClient.builder()
+                .baseUrl("https://.test.com")
+                .filter(oauth)
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+    }
+}
 
