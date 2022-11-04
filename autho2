@@ -4,6 +4,9 @@ https://www.baeldung.com/spring-security-pkce-secret-clients
 Online PKCE generate tool
 https://tonyxu-io.github.io/pkce-generator/
 
+oauth2 test environment
+oauth.com/playground/index.html
+
 OpenId:
 https://www.baeldung.com/spring-security-openid-connect
 
