@@ -1,3 +1,5 @@
 Server side cookie and client cookie
 
 https://stackoverflow.com/questions/6922145/what-is-the-difference-between-server-side-cookie-and-client-side-cookie#:~:text=Cookies%20always%20belong%20to%20the,thing%20as%20server%20side%20cookie.
+
+https://www.baeldung.com/spring-security-oauth2-refresh-token-angular
