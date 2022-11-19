@@ -1,3 +1,9 @@
+Online challenge code generate from Code Verifier:
+Online PKCE Generator Tool
+tonyxu-io.github.io/pkce-generator/
+doc:
+https://www.valentinog.com/blog/challenge/
+
 https://www.analyticsvidhya.com/blog/2022/06/spring-security-oauth2-with-keycloak-pkce-authorization-code-flow/
 https://www.codeburps.com/post/spring-boot-oauth2-for-server-to-server-security
 https://www.baeldung.com/spring-security-pkce-secret-clients
