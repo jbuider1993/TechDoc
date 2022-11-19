@@ -1,8 +1,10 @@
 Online challenge code generate from Code Verifier:
 Online PKCE Generator Tool
 tonyxu-io.github.io/pkce-generator/
+code_challenge = base64urlEncode(SHA256(ASCII(code_verifier)))
 doc:
 https://www.valentinog.com/blog/challenge/
+code_challenge = base64urlEncode(SHA256(ASCII(code_verifier)))
 
 https://www.analyticsvidhya.com/blog/2022/06/spring-security-oauth2-with-keycloak-pkce-authorization-code-flow/
 https://www.codeburps.com/post/spring-boot-oauth2-for-server-to-server-security
