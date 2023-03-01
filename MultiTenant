@@ -1,0 +1,59 @@
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.properties.hibernate.multiTenancy=SCHEMA
+spring.jpa.properties.hibernate.tenant_identifier_resolver=com.example.TenantIdentifierResolver
+spring.jpa.properties.hibernate.multi_tenant_connection_provider=com.example.MultiTenantConnectionProvider
+
+
+public class MyMultiTenantConnectionProvider implements MultiTenantConnectionProvider {
+
+    private final String DEFAULT_TENANT_ID = "public";
+    private final Map<String, DataSource> dataSourceMap = new HashMap<>();
+
+    public MyMultiTenantConnectionProvider() {
+        // Initialize data sources for each tenant
+        dataSourceMap.put(DEFAULT_TENANT_ID, createDataSource(DEFAULT_TENANT_ID)); // public schema
+        dataSourceMap.put("tenant1", createDataSource("tenant1"));
+        dataSourceMap.put("tenant2", createDataSource("tenant2"));
+    }
+
+    private DataSource createDataSource(String tenantId) {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl("jdbc:mysql://localhost:3306/" + tenantId + "?createDatabaseIfNotExist=true");
+        config.setUsername("root");
+        config.setPassword("password");
+        return new HikariDataSource(config);
+    }
+
+    @Override
+    public Connection getAnyConnection() throws SQLException {
+        return dataSourceMap.get(DEFAULT_TENANT_ID).getConnection();
+    }
+
+    @Override
+    public Connection getConnection(String tenantId) throws SQLException {
+        if (dataSourceMap.containsKey(tenantId)) {
+            return dataSourceMap.get(tenantId).getConnection();
+        } else {
+            throw new SQLException("No data source found for tenant ID: " + tenantId);
+        }
+    }
+
+    @Override
+    public void releaseAnyConnection(Connection connection) throws SQLException {
+        connection.close();
+    }
+
+    @Override
+    public void releaseConnection(String tenantId, Connection connection) throws SQLException {
+        connection.close();
+    }
+
+    @Override
+    public boolean supportsAggressiveRelease() {
+        return true;
+    }
+
+    @Override
+    public boolean isUnwrappableAs(Class aClass) {
+        return false;
+}
